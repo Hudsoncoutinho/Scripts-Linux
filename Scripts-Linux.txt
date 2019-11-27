@@ -1,0 +1,9 @@
+#!/bin/bash
+# Exibe a Memória RAM disponivel no sistema
+echo "Memória Ram Disponível"
+free -m
+echo "Será executado o Script para limpeza do cache"
+# Execução do Script de limpeza do cache 
+sudo echo 3 >| /proc/sys/vm/drop_caches
+echo "Memória RAM disponível"
+free -m 
