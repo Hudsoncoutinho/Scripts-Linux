@@ -1,0 +1,12 @@
+# DISCO 
+
+# du na raiz (disk Usage) retorna informações dos discos e porcentagem em uso
+time du -chsx /var /usr /tmp /srv /root /opt /mnt /media /home /etc | sort -h 
+
+# du apenas em files/dirs not hidden 
+time du -chsx /var/* | sort -h      
+
+# du considerando hidden files/dirs 
+time du -chsx /var/jenkins_home/{,.[^.]}* | sort -h                           
+
+ 
