@@ -1,0 +1,18 @@
+# RAM 
+
+# todos os processos cortados na largura da tela
+ps -ef   
+
+# todos os processos com a linha de comando completa 
+ps -efww
+
+# uso de ram/swap
+free -m
+
+# liberação de ram em buffer/cache (deve ser executado como usuario Root, ou com o paramêtro sudo no inicio do comando)
+echo 3 >| /proc/sys/vm/drop_caches 
+ 
+# atualiza saída do comando a cada 1s 
+watch -n1 free -m 
+
+ 
