@@ -1,0 +1,34 @@
+# SWAP 
+
+# ocupação dos devices montados 
+df-hT
+
+# análise do layout de discos/devices disponíveis 
+sfdisk -l
+
+# partições/devices montados no boot 
+cat /etc/fstab 
+
+# visualização dos volumes lógicos lvm como GRUPO-VOLUME 
+l /dev/mapper/ 
+
+# visualização dos volumes lógicos lvm do GRUPO 
+l /dev/GRUPO/ 
+
+# desativação do volume lógico de swap 
+time swapoff /dev/GRUPO/swap 
+
+# desativação de todos os devices de swap ativados
+time swapoff -a              
+
+# ativa todos os devices de swap indicados em /etc/fstab 
+swapon -a
+
+# retorna cada device ativado
+swapon -s  
+
+# lista block devices hierarquicamente 
+lsblk
+
+# lista block devices menos amigavelmente 
+blkid 
