@@ -1,142 +1,65 @@
 sudo apt install tmux 
 
- 
-
 # USO BÁSICO 
-
- 
-
 tmux new 
-
 tmux set -g status off 
-
 tmux set -g mouse  on 
-
 tmux splitw –v 
-
 tmux splitw –h 
  
-
- 
-
- 
-
 # EXEMPLO: DIVISÃO DO TERMINAL EM GRID 3x3 
+tmux new     -d -y $LINES -x $COLUMNS 
+
+# CONFIGURAÇÃO 
+tmux set     -g set-titles            on 
+tmux set     -g set-titles-string     $assunto 
+tmux set     -g status                off 
+tmux set     -g mouse                 on 
+tmux set     -g pane-border-fg        cyan 
+tmux set     -g pane-border-bg        black 
+tmux set     -g pane-active-border-fg cyan 
+tmux set     -g pane-active-border-bg black 
+tmux set     -g prefix                Escape 
+
+ 
+# copy and paste with a mouse with tmux <http://unix.stackexchange.com/a/318285> 
+tmux bind                    Escape kill-server 
+tmux bind    -T root MouseDown2Pane run-shell    -b  "tmux paste-buffer" 
+tmux bind    -n         WheelUpPane  if-shell -F -t= "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'" 
+
+# "#{mouse_any_flag}" 
+# "send-keys -M" 
+# "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'" 
+
+ 
+# COLUNAS (um comando 'splitw -h' a menos que a largura da matriz) 
+tmux splitw  -h 
+tmux splitw  -h 
+tmux selectl even-horizontal 
 
  
 
-  tmux new     -d -y $LINES -x $COLUMNS 
-
- 
-
-  # CONFIGURAÇÃO 
-
-  tmux set     -g set-titles            on 
-
-  tmux set     -g set-titles-string     $assunto 
-
-  tmux set     -g status                off 
-
-  tmux set     -g mouse                 on 
-
- 
-
-  tmux set     -g pane-border-fg        cyan 
-
-  tmux set     -g pane-border-bg        black 
-
-  tmux set     -g pane-active-border-fg cyan 
-
-  tmux set     -g pane-active-border-bg black 
-
-  tmux set     -g prefix                Escape 
-
- 
-
-  # copy and paste with a mouse with tmux <http://unix.stackexchange.com/a/318285> 
-
-  tmux bind                    Escape kill-server 
-
-  tmux bind    -T root MouseDown2Pane run-shell    -b  "tmux paste-buffer" 
-
-  tmux bind    -n         WheelUpPane  if-shell -F -t= "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'" 
-
-       # "#{mouse_any_flag}" 
-
-       # "send-keys -M" 
-
-       # "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'" 
-
- 
-
-  # COLUNAS (um comando 'splitw -h' a menos que a largura da matriz) 
-
-  tmux splitw  -h 
-
-  tmux splitw  -h 
-
- 
-
-  tmux selectl even-horizontal 
-
- 
-
-  # LINHAS (um bloco para cada coluna, um comando 'splitw -v' a menos que a altura da matriz) 
-
-  tmux selectp -t 0 
-
-  tmux splitw  -v -p 66 
-
-  tmux splitw  -v 
-
+# LINHAS (um bloco para cada coluna, um comando 'splitw -v' a menos que a altura da matriz) 
+tmux selectp -t 0 
+tmux splitw  -v -p 66 
+tmux splitw  -v 
+# tmux resizep -U 1 
+tmux selectp -t 3 
+tmux splitw  -v -p 66 
+tmux splitw  -v 
+# tmux resizep -U 1 
+tmux selectp -t 6 
+tmux splitw  -v 
 # tmux resizep -U 1 
 
- 
-
-  tmux selectp -t 3 
-
-  tmux splitw  -v -p 66 
-
-  tmux splitw  -v 
-
-# tmux resizep -U 1 
-
- 
-
-  tmux selectp -t 6 
-
-  tmux splitw  -v -p 66 
-
-  tmux splitw  -v 
-
-# tmux resizep -U 1 
-
- 
-
-  # CONTEÚDO 
-
-  tmux send    -t 0 "$script" enter 
-
-  tmux send    -t 1 "$script" enter 
-
-  tmux send    -t 2 "$script" enter 
-
- 
-
-  tmux send    -t 3 "$script" enter 
-
-  tmux send    -t 4 "$script" enter 
-
-  tmux send    -t 5 "$script" enter 
-
- 
-
-  tmux send    -t 6 "$script" enter 
-
-  tmux send    -t 7 "$script" enter 
-
-  tmux send    -t 8 "$script" enter 
-
- 
-
-  tmux attach 
+# CONTEÚDO 
+tmux send    -t 0 "$script" enter 
+tmux send    -t 1 "$script" enter 
+tmux send    -t 2 "$script" enter 
+tmux send    -t 3 "$script" enter 
+tmux send    -t 4 "$script" enter 
+tmux send    -t 5 "$script" enter 
+tmux send    -t 6 "$script" enter 
+tmux send    -t 7 "$script" enter 
+tmux send    -t 8 "$script" enter 
+tmux attach 
