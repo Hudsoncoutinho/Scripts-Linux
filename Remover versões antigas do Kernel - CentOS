@@ -1,0 +1,3 @@
+# CentOS 
+
+ df -hT /boot; yum -y install yum-utils; package-cleanup -y --oldkernels --count=2; df -hT /boot 
